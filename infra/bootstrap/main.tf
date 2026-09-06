@@ -152,13 +152,46 @@ data "aws_iam_policy_document" "confianza_github" {
       variable = "token.actions.githubusercontent.com:aud"
       values   = ["sts.amazonaws.com"]
     }
-    # La condición que hace el trabajo. Sin acotar el `sub`, CUALQUIER repo de
-    # GitHub podría asumir este rol. Acá se limita a este repo y a su rama
-    # principal: un PR de un fork no despliega.
+    # La condición que hace el trabajo. Sin acotarla, CUALQUIER repo de GitHub
+    # podría asumir este rol. Acá se limita a este repo y a su rama principal:
+    # un PR de un fork no despliega.
+    #
+    # POR QUÉ NO SE COMPARA CONTRA `sub`, que es lo que enseña todo tutorial.
+    # GitHub ya no emite el `sub` documentado. Medido en este repo, manda:
+    #
+    #   repo:Diegocs2410@89321032/oriente-web@1359161488:ref:refs/heads/main
+    #
+    # Le pega identificadores inmutables al dueño y al repo para que el permiso
+    # sobreviva a un renombrado. La consecuencia es que la comparación clásica
+    # `repo:usuario/repo:ref:refs/heads/main` NO coincide, y AWS responde
+    # «Not authorized to perform sts:AssumeRoleWithWebIdentity» sin decir por
+    # qué. Se diagnostica imprimiendo las reclamaciones del token, no leyendo
+    # la documentación.
+    #
+    # Y no se puede simplemente dejar de mirarlo: AWS RECHAZA una política de
+    # confianza hacia GitHub que no evalúe `sub` o `job_workflow_ref` de forma
+    # acotada. Es un guardarraíl propio contra las confianzas demasiado anchas,
+    # y es correcto — sin él sería fácil dejar entrar a todo GitHub.
+    #
+    # Entonces se hacen las dos cosas. El comodín va sólo donde están los
+    # identificadores; el nombre del dueño queda fijo antes de la arroba, para
+    # que `Diegocs2410@*` no pueda coincidir con otro usuario parecido.
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.github_repo}:ref:refs/heads/main"]
+      values   = ["repo:${split("/", var.github_repo)[0]}@*/${split("/", var.github_repo)[1]}@*:ref:refs/heads/main"]
+    }
+
+    # Y estas dos son las que de verdad acotan, en texto legible.
+    condition {
+      test     = "StringEquals"
+      variable = "token.actions.githubusercontent.com:repository"
+      values   = [var.github_repo]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "token.actions.githubusercontent.com:ref"
+      values   = ["refs/heads/main"]
     }
   }
 }
