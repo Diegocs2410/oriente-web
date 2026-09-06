@@ -1,0 +1,47 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 3340,
+      "title": "Portada — papel cálido"
+    },
+    {
+      "file": "Movil.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 390,
+      "h": 3250,
+      "title": "Portada en móvil"
+    },
+    {
+      "file": "DireccionOscura.dc.html",
+      "x": 0,
+      "y": 3380,
+      "w": 1440,
+      "h": 1260,
+      "title": "Alterna — oscuro técnico"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "que-cambio",
+      "x": -330,
+      "y": 0,
+      "w": 270,
+      "text": "QUÉ CAMBIÓ\n\n1. Los oficios dejan de ser una lista de texto y pasan a ser tres pantallas reales, cada una con su color y su vocabulario. El argumento se ve en vez de leerse.\n\n2. Citaria pasa a fondo oscuro con su agenda grande: es el pico de la página y la única prueba que tenemos.\n\n3. Entra una tipografía monoespaciada para etiquetas técnicas — es lo que hace que lea a casa de software y no a estudio de diseño.\n\n4. Sección nueva: «Cómo construimos». Material que no existía; si sobra, se corta."
+    },
+    {
+      "id": "alterna",
+      "x": -330,
+      "y": 3380,
+      "w": 270,
+      "text": "LA ALTERNA\n\nMismo contenido, mundo opuesto: fondo oscuro, sin serif, tipografía Archivo, más denso.\n\nA favor: es lo que la mayoría reconoce como «software house» — se parece a Vercel o Linear.\n\nEn contra: justo por eso se parece a todos. El papel cálido es tuyo; esto es el uniforme del sector.\n\nEl acento ocre se mantiene en las dos, para que sigan siendo la misma marca."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}

@@ -1,0 +1,106 @@
+name: Desplegar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Sin llaves largas: GitHub presenta un token OIDC firmado y AWS devuelve
+# credenciales temporales. `id-token: write` es lo que lo habilita.
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run lint
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sitio
+          path: out/
+          retention-days: 1
+
+  # En un PR sólo se muestra el plan. Aplicar desde un PR permitiría que un
+  # fork cambiara infraestructura.
+  plan:
+    needs: verificar
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Plan
+        working-directory: infra/sitio
+        run: |
+          terraform init
+          terraform plan -no-color
+
+  desplegar:
+    needs: verificar
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: sitio
+          path: out
+      - uses: hashicorp/setup-terraform@v3
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Aplicar infraestructura
+        id: infra
+        working-directory: infra/sitio
+        run: |
+          terraform init
+          terraform apply -auto-approve
+          echo "bucket=$(terraform output -raw bucket)" >> "$GITHUB_OUTPUT"
+          echo "distribucion=$(terraform output -raw distribucion_id)" >> "$GITHUB_OUTPUT"
+          echo "url=$(terraform output -raw url)" >> "$GITHUB_OUTPUT"
+
+      # Dos pasadas, y el orden importa. Primero lo inmutable con caché de un
+      # año; después el HTML, que no se cachea en el navegador. Al revés, un
+      # visitante podría recibir el HTML nuevo apuntando a bundles que todavía
+      # no subieron.
+      - name: Subir estáticos inmutables
+        run: |
+          aws s3 sync out/ "s3://${{ steps.infra.outputs.bucket }}/" \
+            --delete --exclude "*" --include "_next/static/*" \
+            --cache-control "public,max-age=31536000,immutable"
+
+      - name: Subir el resto
+        run: |
+          aws s3 sync out/ "s3://${{ steps.infra.outputs.bucket }}/" \
+            --delete --exclude "_next/static/*" \
+            --cache-control "public,max-age=0,must-revalidate"
+
+      - name: Invalidar la caché del borde
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ steps.infra.outputs.distribucion }}" \
+            --paths "/*"
+
+      - name: Dónde quedó
+        run: echo "### Desplegado en ${{ steps.infra.outputs.url }}" >> "$GITHUB_STEP_SUMMARY"

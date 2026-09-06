@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Archivo', system-ui, sans-serif; }
+    a { color: #f88a3d; text-decoration: none; }
+    a:hover { color: #ffa661; }
+    h1, h2, h3 { margin: 0; letter-spacing: -0.03em; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    ul { margin: 0; padding: 0; list-style: none; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; background: #0d0f12; color: #f2f4f6;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 40px; height: 72px; padding: 0 72px; border-bottom: 1px solid rgba(242,244,246,0.10);">
+    <span style="font-size: 19px; font-weight: 700; letter-spacing: -0.03em;">Oriente</span>
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <span style="display: flex; align-items: center; height: 44px; padding: 0 14px; font-size: 14px; color: #98a1ab;">Citaria</span>
+      <span style="display: flex; align-items: center; height: 44px; padding: 0 14px; font-size: 14px; color: #98a1ab;">Nosotros</span>
+      <span style="display: flex; align-items: center; height: 44px; padding: 0 14px; font-size: 14px; color: #98a1ab;">Contacto</span>
+      <span style="display: flex; align-items: center; height: 44px; padding: 0 18px; margin-left: 10px; background: #f88a3d; color: #180c02; border-radius: 8px; font-size: 14px; font-weight: 600;">Hablemos</span>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1.1fr minmax(0, 1fr); gap: 72px; padding: 88px 72px 76px;">
+    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 26px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #f88a3d;">Casa de software · Colombia</span>
+      <h1 style="font-size: 78px; line-height: 1.0; letter-spacing: -0.045em; font-weight: 700;">Un motor,<br>muchos oficios.</h1>
+      <p style="max-width: 48ch; font-size: 19px; line-height: 1.55; color: #98a1ab;">Construimos y operamos software para negocios de servicios en Colombia. Cada oficio con su vocabulario, sus tiempos y sus reglas — no una plantilla con otro logo.</p>
+      <div style="display: flex; align-items: center; gap: 14px; padding-top: 6px;">
+        <span style="display: flex; align-items: center; height: 48px; padding: 0 24px; background: #f88a3d; color: #180c02; border-radius: 10px; font-size: 15px; font-weight: 600;">Ver Citaria</span>
+        <span style="display: flex; align-items: center; height: 48px; padding: 0 22px; border: 1px solid rgba(242,244,246,0.18); border-radius: 10px; font-size: 15px; color: #f2f4f6;">Cómo construimos</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 8px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #868e97;">
+        <span>Lo que construimos</span>
+        <span>4 · 1 en operación</span>
+      </div>
+
+      <ul style="display: flex; flex-direction: column; gap: 8px;">
+        <li style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 18px 20px 18px 18px; background: #15181d; border: 1px solid rgba(248,138,61,0.35); border-left: 3px solid #f88a3d; border-radius: 12px;">
+          <span style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em;">Citaria</span>
+            <span style="font-size: 14px; color: #98a1ab;">Reservas en línea para negocios de servicios.</span>
+          </span>
+          <span style="display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #f88a3d; white-space: nowrap;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #f88a3d;"></span>
+            EN OPERACIÓN
+          </span>
+        </li>
+
+        <li style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 18px 20px; border: 1px solid rgba(242,244,246,0.10); border-radius: 12px;">
+          <span style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em; color: #98a1ab;">Hotelería</span>
+            <span style="font-size: 14px; color: #868e97;">Reservas directas para hoteles pequeños.</span>
+          </span>
+          <span style="display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #868e97; white-space: nowrap;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; border: 1px solid #868e97;"></span>
+            EN CONSTRUCCIÓN
+          </span>
+        </li>
+
+        <li style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 18px 20px; border: 1px solid rgba(242,244,246,0.10); border-radius: 12px;">
+          <span style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em; color: #98a1ab;">Gimnasios</span>
+            <span style="font-size: 14px; color: #868e97;">Mensualidades y cupos de clase.</span>
+          </span>
+          <span style="display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #868e97; white-space: nowrap;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; border: 1px solid #868e97;"></span>
+            EN EXPLORACIÓN
+          </span>
+        </li>
+
+        <li style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 18px 20px; border: 1px solid rgba(242,244,246,0.10); border-radius: 12px;">
+          <span style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em; color: #98a1ab;">Oficios</span>
+            <span style="font-size: 14px; color: #868e97;">Entre quien necesita un oficio y quien lo ejerce.</span>
+          </span>
+          <span style="display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #868e97; white-space: nowrap;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; border: 1px solid #868e97;"></span>
+            EN EXPLORACIÓN
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background: #15181d; border-top: 1px solid rgba(242,244,246,0.10); padding: 64px 72px;">
+    <h2 style="max-width: 34ch; font-size: 38px; line-height: 1.1; letter-spacing: -0.035em; font-weight: 600;">La misma pantalla, otro oficio.</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 34px;">
+      <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #1b1f26; border: 1px solid rgba(242,244,246,0.10); border-radius: 12px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px;">
+          <span style="font-size: 14px; font-weight: 600;">Barbería</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #868e97;">30 min</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; background: rgba(248,138,61,0.14); border-left: 2px solid #f88a3d; border-radius: 6px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #f88a3d;">9:00</span>
+          <span style="font-size: 13px;">Corte de cabello</span>
+        </div>
+        <span style="font-size: 13px; color: #98a1ab;">Lo atiende un <strong style="color: #f2f4f6;">barbero</strong>. Quien reserva es un <strong style="color: #f2f4f6;">cliente</strong>.</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #1b1f26; border: 1px solid rgba(242,244,246,0.10); border-radius: 12px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px;">
+          <span style="font-size: 14px; font-weight: 600;">Odontología</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #868e97;">90 min</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; height: 132px; padding: 0 12px; background: rgba(248,138,61,0.14); border-left: 2px solid #f88a3d; border-radius: 6px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #f88a3d;">9:00</span>
+          <span style="font-size: 13px;">Endodoncia</span>
+        </div>
+        <span style="font-size: 13px; color: #98a1ab;">La atiende una <strong style="color: #f2f4f6;">odontóloga</strong>. Quien reserva es un <strong style="color: #f2f4f6;">paciente</strong>.</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #1b1f26; border: 1px solid rgba(242,244,246,0.10); border-radius: 12px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px;">
+          <span style="font-size: 14px; font-weight: 600;">Spa</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #868e97;">120 min</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; height: 176px; padding: 0 12px; background: rgba(248,138,61,0.14); border-left: 2px solid #f88a3d; border-radius: 6px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #f88a3d;">9:00</span>
+          <span style="font-size: 13px;">Ritual completo</span>
+        </div>
+        <span style="font-size: 13px; color: #98a1ab;">Reserva la <strong style="color: #f2f4f6;">cabina</strong>, no la terapeuta.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
