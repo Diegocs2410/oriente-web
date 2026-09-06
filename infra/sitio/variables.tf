@@ -17,13 +17,3 @@ variable "certificado_arn" {
     tiempo hace perder la primera vez.
   TXT
 }
-
-variable "origen_api" {
-  type        = string
-  default     = ""
-  description = <<-TXT
-    Origen de la API de formularios (https://xxx.execute-api...), para
-    autorizarlo en el `connect-src` de la CSP. Vacío hasta que exista: una CSP
-    que permite un origen que no existe es permiso regalado.
-  TXT
-}

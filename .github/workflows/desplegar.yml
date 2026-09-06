@@ -28,7 +28,11 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm run lint
+      # La URL de la API se hornea en el HTML al compilar: el sitio es
+      # estático, así que no puede leerla en tiempo de ejecución.
       - run: npm run build
+        env:
+          NEXT_PUBLIC_API_CONTACTO: ${{ vars.API_CONTACTO }}
       - uses: actions/upload-artifact@v5
         with:
           name: sitio

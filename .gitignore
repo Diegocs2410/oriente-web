@@ -50,3 +50,6 @@ crash.log
 
 # el lienzo de diseño se regenera con el seeder; son 2.5 MB de editor
 diseno/sitio-oriente.html
+
+# zips que Terraform genera para las Lambdas
+infra/**/.build/

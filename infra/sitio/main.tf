@@ -18,6 +18,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
+    archive = {
+      source  = "hashicorp/archive"
+      version = "~> 2.0"
+    }
   }
 }
 
@@ -142,7 +146,7 @@ resource "aws_cloudfront_response_headers_policy" "seguridad" {
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data:",
         "script-src 'self'",
-        "connect-src 'self'${var.origen_api == "" ? "" : " ${var.origen_api}"}",
+        "connect-src 'self' ${aws_apigatewayv2_api.formularios.api_endpoint}",
         "frame-ancestors 'none'",
       ])
       override = true
