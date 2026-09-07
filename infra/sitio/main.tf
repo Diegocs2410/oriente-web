@@ -145,7 +145,23 @@ resource "aws_cloudfront_response_headers_policy" "seguridad" {
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data:",
-        "script-src 'self'",
+        # `unsafe-inline` acá NO es pereza, y tampoco es gratis: es la
+        # consecuencia de exportar estático. Next.js emite scripts en línea
+        # para arrancar la hidratación, y sin permitirlos React nunca toma
+        # control — el sitio se ve bien pero no tiene JavaScript vivo. Así se
+        # publicó la primera versión y no se notó, porque casi todo es
+        # contenido quieto; se descubrió cuando el formulario recargó la
+        # página en vez de enviar.
+        #
+        # Las dos salidas estrictas no aplican: los `nonce` necesitan un
+        # servidor que genere uno por petición, y los `hash` cambian en cada
+        # compilación, así que habría que reescribir esta política de
+        # CloudFront en cada despliegue.
+        #
+        # El riesgo que se acepta: si algún día el sitio renderiza contenido
+        # que escribe un tercero, esto deja de ser aceptable y toca volver a
+        # los hashes generados por el pipeline.
+        "script-src 'self' 'unsafe-inline'",
         "connect-src 'self' ${aws_apigatewayv2_api.formularios.api_endpoint}",
         "frame-ancestors 'none'",
       ])
